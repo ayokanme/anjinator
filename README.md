@@ -13,3 +13,5 @@ Two ways:
 
 1. You express an idea and its translation. It gets converted to Anjin-speak. The Mariko Sama translation gets fixed, if needed.
 2. Provide a Mariko Sama translation and get some Anjin-speak
+
+### [Share]()
