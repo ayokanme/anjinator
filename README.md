@@ -1,11 +1,15 @@
-### Anjinator
+# Anjinator
 
 This is a demo project to make memes fluidly.
 
 ## Inspiration
 
 Shogun, a remarkably well done show, just completed its first season and has birthed a new breed of memes.
-John Blackthorne (the Anjin) will say something in his uncouth manner. Mariko Sama (his translator) then translates it succinctly. Too succinctly. Like a reverse Obama anger translator.
+John Blackthorne (the Anjin) will say something in his uncouth manner. Mariko Sama (his translator) then translates it succinctly.
+
+Too succinctly.
+
+Like a reverse Obama anger translator.
 
 ## How does it work?
 
