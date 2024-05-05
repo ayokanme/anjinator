@@ -46,7 +46,7 @@ export async function POST(req: Request) {
 
         #7
         Blackthorne: "You can tell your lord that if he goes woke he'll go broke. A man is a man and a woman is a woman. DEI is going to ruin everything by making us all trans"
-        Mariko: "The Anjin says the police should scan his harddrive, my lord"
+        Mariko: "The Anjin says the police should scan his hard drive, my lord"
 
         #8
         Blackthorne: "I spent 3 hours on the phone with the bank. They passed me from customer service to card services to mortgage refinancing. Then they told me they would call back in 2 hours but didn't until 3 hours later when I was in my interview. They still haven't fixed the issue. I'm going to lose my mind."
@@ -58,11 +58,26 @@ export async function POST(req: Request) {
 
         #10
         Blackthorne: "This is about history and heritage goddammit! And we can’t have passengers who refuse to commit to giving their blood for the cause & all the past glories.  I won’t have it!! You tell him that!"
-        Mariko: "The Anjin is a Manchester United fan."`,
+        Mariko: "The Anjin is a Manchester United fan."
+
+        You will receive one of two styles of inputs:
+        [Style-1] Inputs: ramblings from blackthorne AND (an optional) translation from Mariko.
+        If a translation is provided, generate 2 more that capture the essence of the the ramblings better.
+        Make sure to include the original translation.
+
+        [Style-2] translation from Mariko AND a tone for Blackthorne's ramblings.
+        Use the the tone and translation to determine what John Blackthorne is rambling about.
+
+        use the the following JSON formats to respond to each of the following styles:
+        [Style-1]
+        { "anjin": "blackthorne-esque ramblings", "mariko": ["mariko's understated and pointed translation #1", "mariko's understated and pointed translation #2", "mariko's understated and pointed translation #3"] }
+
+        [Style-2]
+        { "anjin": ["blackthorne-esque rambling #1", "blackthorne-esque rambling #2", "blackthorne-esque rambling #3"], "mariko": "mariko's understated and pointed translation" }`,
       },
       {
         role: "user",
-        content: "inputs(blackthorne, mariko sama)",
+        content: "inputs(blackthorne, mariko sama) function -> mention style-1 or style-2 along with inputs",
       }
     ];
 
