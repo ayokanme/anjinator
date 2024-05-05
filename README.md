@@ -2,7 +2,7 @@
 
 Fluid meme making
 
-<!-- IMAGE SHOULD GO HERE -->
+<!-- TODO: IMAGE SHOULD GO HERE -->
 
 ## Inspiration
 
