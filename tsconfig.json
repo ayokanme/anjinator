@@ -33,7 +33,10 @@
       ],
       "@config/*": [
         "./src/config/*"
-      ]
+      ],
+      "@styles/*": [
+        "./src/styles/*"
+      ],
     }
   },
   "include": [
