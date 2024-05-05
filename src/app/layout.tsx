@@ -13,6 +13,14 @@ export const metadata: Metadata = {
   description: "Fluid meme making",
 };
 
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+};
+
+// todo: background color -> bg-background
 export default function RootLayout({
   children,
 }: Readonly<{
