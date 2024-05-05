@@ -34,6 +34,11 @@ import { ReloadIcon } from "@radix-ui/react-icons";
 
 const anjinTones = ["curious", "livid", "pleading", "petulant"] as const;
 
+const AnjinatedSchema = z.object({
+  mariko: z.string(),
+  anjin: z.string(),
+});
+
 const AnjinatorMemeSchema = z
   .object({
     mariko: z
@@ -58,6 +63,7 @@ const AnjinatorMemeSchema = z
       )
   );
 
+type AnjinatedReturn = z.infer<typeof AnjinatedSchema>;
 type AnjinatorMemeForm = z.infer<typeof AnjinatorMemeSchema>;
 
 export function ButtonRender({ isSubmitting }: { isSubmitting: boolean }) {
@@ -72,24 +78,64 @@ export function ButtonRender({ isSubmitting }: { isSubmitting: boolean }) {
 }
 
 export default function AnjinatorMemePage() {
+  const [activeTab, setActiveTab] = useState("full");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [generatedMeme, setGeneratedMeme] = useState<AnjinatedReturn | null>(
+    null
+  );
 
   const form = useForm<AnjinatorMemeForm>({
     resolver: zodResolver(AnjinatorMemeSchema),
+    defaultValues: {
+      blackthorne: "",
+      mariko: "",
+    },
   });
 
-  function onSubmit(data: AnjinatorMemeForm) {
+  async function onSubmit(data: AnjinatorMemeForm) {
     setIsSubmitting(true);
-    // todo: submit to backend
-    console.log(data);
+
+    const anjin = {
+      key: activeTab === "full" ? "blackthorne" : "tone",
+      value:
+        activeTab === "full" && "blackthorne" in data
+          ? data.blackthorne
+          : activeTab === "full" && "tone" in data
+          ? data.tone
+          : undefined,
+    };
+
+    const response = await fetch("/api/anjinator", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        [anjin.key]: anjin.value,
+        mariko: data.mariko,
+      }),
+    });
+
+    const result = await response.json();
+
+    const parsed = AnjinatedSchema.parse(result);
+
+    setGeneratedMeme(parsed);
     setIsSubmitting(false);
   }
 
   return (
-    <Tabs defaultValue="full" className="w-[600px]">
+    <Tabs value={activeTab} className="w-[600px]">
       <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="full">Full</TabsTrigger>
-        <TabsTrigger value="anjin-speak">Anjin Speak</TabsTrigger>
+        <TabsTrigger value="full" onClick={() => setActiveTab("full")}>
+          Full
+        </TabsTrigger>
+        <TabsTrigger
+          value="anjin-speak"
+          onClick={() => setActiveTab("anjin-speak")}
+        >
+          Anjin Speak
+        </TabsTrigger>
       </TabsList>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -163,6 +209,7 @@ export default function AnjinatorMemePage() {
                       <FormControl>
                         <RadioGroup
                           onValueChange={field.onChange}
+                          value={field.value}
                           className="space-y-[0.5]"
                         >
                           {anjinTones.map((tone, idx) => {
