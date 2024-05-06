@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 export default function MemesLayout({
   children,
 }: {
@@ -5,7 +7,7 @@ export default function MemesLayout({
 }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      {children}
+      <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
     </div>
   );
 }
