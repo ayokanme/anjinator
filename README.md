@@ -2,7 +2,8 @@
 
 Fluid meme making
 
-<!-- TODO: IMAGE SHOULD GO HERE -->
+![image](https://github.com/ayokanme/anjinator/assets/88415295/95ed9cf5-0905-4bad-9783-1a2fc66b2654)
+
 
 ## Inspiration
 
